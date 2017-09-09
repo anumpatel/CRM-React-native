@@ -11,9 +11,14 @@ import {
   View
 } from 'react-native';
 import firebase from 'firebase'
+import {Provider} from 'react-redux'
+import {createStore } from 'redux'
 import Login from './login'
 import PeopleList from './PeopleList'
 import Loader from './loader'
+import reducers from '../reducers/PeopleReducer'
+
+const store = createStore(reducers)
 
 export default class App extends Component {
   state = {
@@ -50,10 +55,12 @@ export default class App extends Component {
 
   render() {
     return (
+      <Provider store={store}>
       <View style={styles.container}>
 
         {this.renderInitialView()}
       </View>
+      </Provider>
     );
   }
 }
